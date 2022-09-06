@@ -1,0 +1,27 @@
+name: Tests
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    name: Test and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install Dependencies
+        run: npm ci
+      - name: Check Types
+        run: npm run check-types
+      - name: Run ESLint
+        run: npm run lint
+      - name: Deploy to CloudFlare
+        uses: cloudflare/wrangler-action@2.0.0
+        with:
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CF_API_TOKEN }}

@@ -1,0 +1,15 @@
+name = "lamar"
+main = "./src/index.ts"
+node_compat = false
+
+kv_namespaces = [{ binding = "KV", id = "15067714f5aa4f999ba02ee3728fd132", preview_id = "236163461e9c4c3c947cac767695b4ab" }]
+
+compatibility_date = "2022-09-06"
+
+[triggers]
+crons = ["*/10 * * * *"]
+
+# [secrets]
+# DISCORD_WEBHOOK_URL
+# STEAM_API_KEY
+# STEAM_ID

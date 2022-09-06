@@ -1,0 +1,14 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["config:base", "group:allNonMajor", ":gitSignOff"],
+	"timezone": "America/New_York",
+	"schedule": ["On Monday at 9:00 am"],
+	"labels": ["dependencies"],
+	"assignees": ["bachmacintosh"],
+	"packageRules": [
+		{
+			"matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+			"automerge": true
+		}
+	]
+}
