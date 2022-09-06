@@ -93,6 +93,6 @@ export default async function handleScheduled(env: Env): Promise<void> {
 		}
 	}
 
-	await env.KV.put("game_info", JSON.stringify(currentSteamUserInfo), { expirationTtl: 86400 });
+	await env.KV.put("game_info", JSON.stringify(steamInfo), { expirationTtl: 86400 });
 	await sendMessage(env, payload);
 }
