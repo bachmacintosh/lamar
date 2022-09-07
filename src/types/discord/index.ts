@@ -1,7 +1,15 @@
 import type {
+	APIChatInputApplicationCommandInteraction,
 	APIInteraction,
 	APIInteractionResponsePong,
+	RESTPostAPIInteractionCallbackJSONBody,
 	RESTPostAPIWebhookWithTokenJSONBody,
 } from "discord-api-types/v10";
 
-export type { APIInteraction, APIInteractionResponsePong, RESTPostAPIWebhookWithTokenJSONBody };
+export type {
+	APIChatInputApplicationCommandInteraction,
+	APIInteraction,
+	APIInteractionResponsePong,
+	RESTPostAPIInteractionCallbackJSONBody,
+	RESTPostAPIWebhookWithTokenJSONBody,
+};
