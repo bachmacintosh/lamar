@@ -3,10 +3,9 @@ import type {
 	APIInteraction,
 	APIInteractionResponsePong,
 	Env,
-	RESTPostAPIInteractionCallbackJSONBody,
 } from "../../types";
 import { InteractionResponseType, InteractionType } from "../../const/discord/ourAPIVersion";
-import respondToCommand from "./respondToCommand";
+import handleCommand from "./handleCommand";
 import verifyRequest from "../util/verifyRequest";
 
 export default async function handleInteraction(request: Request, env: Env): Promise<Response> {
@@ -25,22 +24,8 @@ export default async function handleInteraction(request: Request, env: Env): Pro
 			return new Response(JSON.stringify(pong), { status: 200 });
 		} else if (interaction.type === InteractionType.ApplicationCommand) {
 			const command = json as APIChatInputApplicationCommandInteraction;
-			if (
-				command.data.name === "lamar" &&
-				typeof command.data.options !== "undefined" &&
-				command.data.options.length > 0
-			) {
-				const message: RESTPostAPIInteractionCallbackJSONBody = {
-					type: InteractionResponseType.ChannelMessageWithSource,
-					data: {
-						content: `Used Command ${command.data.name} / ${command.data.options[0].name}`,
-					},
-				};
-				await respondToCommand(env, command.id, command.token, message);
-				return new Response("Lamar invoked successfully!", { status: 200 });
-			} else {
-				return new Response("Interaction is not known.", { status: 404 });
-			}
+			await handleCommand(env, command);
+			return new Response("Lamar invoked successfully!", { status: 200 });
 		} else {
 			return new Response("Interaction is not known.", { status: 404 });
 		}
