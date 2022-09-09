@@ -1,0 +1,33 @@
+{
+	"name": "lamar",
+	"type": 1,
+	"description": "Manage the Lamar Daemon",
+	"default_member_permissions": "0",
+	"options": [
+		{
+			"name": "quiet",
+			"type": 1,
+			"description": "Only send message/ping when activity changes"
+		},
+		{
+			"name": "start",
+			"type": 1,
+			"description": "Starts monotoring for Steam Game activity"
+		},
+		{
+			"name": "status",
+			"type": 1,
+			"description": "Get the status of the bot"
+		},
+		{
+			"name": "stop",
+			"type": 1,
+			"description": "Stops monotoring for Steam Game activity"
+		},
+		{
+			"name": "verbose",
+			"type": 1,
+			"description": "Always send a message, even when activity hasn't changed"
+		}
+	]
+}
