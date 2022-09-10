@@ -94,7 +94,7 @@ npx wrangler whoami
 Check Types:
 
 ```shell
-npm run check types
+npm run check-types
 ```
 
 Check for problems, and optionally, fix them:
