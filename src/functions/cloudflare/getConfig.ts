@@ -5,6 +5,7 @@ export default async function getConfig(env: Env): Promise<LamarConfig> {
 	if (kvString === null) {
 		const defaultConfig: LamarConfig = {
 			status: "stopped",
+			dialog: "standard",
 			verbose: false,
 		};
 		await env.KV.put("config", JSON.stringify(defaultConfig));
