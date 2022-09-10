@@ -4,6 +4,7 @@ import type {
 	RESTPostAPIInteractionCallbackJSONBody,
 } from "../../types";
 import { InteractionResponseType } from "../../const/discord/ourAPIVersion";
+import dialog from "../../const/dialog";
 import getConfig from "../cloudflare/getConfig";
 import respondToCommand from "./respondToCommand";
 import setConfig from "../cloudflare/setConfig";
@@ -13,7 +14,22 @@ export default async function handleCommand(
 	command: APIChatInputApplicationCommandInteraction,
 ): Promise<void> {
 	if (command.data.name === "lamar" && typeof command.data.options !== "undefined" && command.data.options.length > 0) {
-		if (command.data.options[0].name === "quiet") {
+		if (command.data.options[0].name === "dialog") {
+			const config = await getConfig(env);
+			if (config.dialog === "standard") {
+				config.dialog = "lamar";
+			} else {
+				config.dialog = "standard";
+			}
+			await setConfig(env, config);
+			const message: RESTPostAPIInteractionCallbackJSONBody = {
+				type: InteractionResponseType.ChannelMessageWithSource,
+				data: {
+					content: dialog[config.dialog].nowCurrentDialog,
+				},
+			};
+			await respondToCommand(env, command.id, command.token, message);
+		} else if (command.data.options[0].name === "quiet") {
 			const config = await getConfig(env);
 			if (config.verbose) {
 				config.verbose = false;
@@ -21,7 +37,7 @@ export default async function handleCommand(
 				const message: RESTPostAPIInteractionCallbackJSONBody = {
 					type: InteractionResponseType.ChannelMessageWithSource,
 					data: {
-						content: `Okay, I'll only let you know important stuff, homie.`,
+						content: dialog[config.dialog].nowQuiet,
 					},
 				};
 				await respondToCommand(env, command.id, command.token, message);
@@ -29,7 +45,7 @@ export default async function handleCommand(
 				const message: RESTPostAPIInteractionCallbackJSONBody = {
 					type: InteractionResponseType.ChannelMessageWithSource,
 					data: {
-						content: `We already quiet, fool!`,
+						content: dialog[config.dialog].alreadyQuiet,
 					},
 				};
 				await respondToCommand(env, command.id, command.token, message);
@@ -40,7 +56,7 @@ export default async function handleCommand(
 				const message: RESTPostAPIInteractionCallbackJSONBody = {
 					type: InteractionResponseType.ChannelMessageWithSource,
 					data: {
-						content: `We're already running, fool!`,
+						content: dialog[config.dialog].alreadyRunning,
 					},
 				};
 				await respondToCommand(env, command.id, command.token, message);
@@ -50,17 +66,23 @@ export default async function handleCommand(
 				const message: RESTPostAPIInteractionCallbackJSONBody = {
 					type: InteractionResponseType.ChannelMessageWithSource,
 					data: {
-						content: `We all up and running now fam.`,
+						content: dialog[config.dialog].nowRunning,
 					},
 				};
 				await respondToCommand(env, command.id, command.token, message);
 			}
 		} else if (command.data.options[0].name === "status") {
 			const config = await getConfig(env);
+			let configuredDialog = "in a standard fashion";
+			if (config.dialog === "lamar") {
+				configuredDialog = "like Lamar from Grand Theft Auto V";
+			}
 			const message: RESTPostAPIInteractionCallbackJSONBody = {
 				type: InteractionResponseType.ChannelMessageWithSource,
 				data: {
-					content: `Bot is ${config.status}, and ${config.verbose ? "is" : "is not"} being verbose.`,
+					content: `Bot is ${config.status}, ${
+						config.verbose ? "is" : "is not"
+					} being verbose, and speaks ${configuredDialog}.`,
 				},
 			};
 			await respondToCommand(env, command.id, command.token, message);
@@ -70,7 +92,7 @@ export default async function handleCommand(
 				const message: RESTPostAPIInteractionCallbackJSONBody = {
 					type: InteractionResponseType.ChannelMessageWithSource,
 					data: {
-						content: `We're already stopped, fool!`,
+						content: dialog[config.dialog].alreadyStopped,
 					},
 				};
 				await respondToCommand(env, command.id, command.token, message);
@@ -80,7 +102,7 @@ export default async function handleCommand(
 				const message: RESTPostAPIInteractionCallbackJSONBody = {
 					type: InteractionResponseType.ChannelMessageWithSource,
 					data: {
-						content: `I'm stopped dead in my tracks cuz.`,
+						content: dialog[config.dialog].nowStopped,
 					},
 				};
 				await respondToCommand(env, command.id, command.token, message);
@@ -91,7 +113,7 @@ export default async function handleCommand(
 				const message: RESTPostAPIInteractionCallbackJSONBody = {
 					type: InteractionResponseType.ChannelMessageWithSource,
 					data: {
-						content: `We already verbose, fool!`,
+						content: dialog[config.dialog].alreadyVerbose,
 					},
 				};
 				await respondToCommand(env, command.id, command.token, message);
@@ -101,7 +123,7 @@ export default async function handleCommand(
 				const message: RESTPostAPIInteractionCallbackJSONBody = {
 					type: InteractionResponseType.ChannelMessageWithSource,
 					data: {
-						content: `You gonna hear every detail from your boy Lamar.`,
+						content: dialog[config.dialog].nowVerbose,
 					},
 				};
 				await respondToCommand(env, command.id, command.token, message);

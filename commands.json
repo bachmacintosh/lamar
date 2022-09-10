@@ -5,6 +5,11 @@
 	"default_member_permissions": "0",
 	"options": [
 		{
+			"name": "dialog",
+			"type": 1,
+			"description": "Toggles between Standard and Lamar Davis Dialog"
+		},
+		{
 			"name": "quiet",
 			"type": 1,
 			"description": "Only send message/ping when activity changes"
