@@ -3,7 +3,9 @@ import type {
 	APIEmbed,
 	APIInteraction,
 	APIInteractionResponsePong,
+	RESTGetAPIChannelMessagesResult,
 	RESTPostAPIChannelMessageJSONBody,
+	RESTPostAPIChannelMessagesBulkDeleteJSONBody,
 	RESTPostAPIInteractionCallbackJSONBody,
 	RESTPostAPIWebhookWithTokenJSONBody,
 } from "discord-api-types/v10";
@@ -14,6 +16,8 @@ export type {
 	APIInteraction,
 	APIInteractionResponsePong,
 	RESTPostAPIChannelMessageJSONBody,
+	RESTGetAPIChannelMessagesResult,
+	RESTPostAPIChannelMessagesBulkDeleteJSONBody,
 	RESTPostAPIInteractionCallbackJSONBody,
 	RESTPostAPIWebhookWithTokenJSONBody,
 };

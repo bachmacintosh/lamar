@@ -3,7 +3,9 @@ import type {
 	APIEmbed,
 	APIInteraction,
 	APIInteractionResponsePong,
+	RESTGetAPIChannelMessagesResult,
 	RESTPostAPIChannelMessageJSONBody,
+	RESTPostAPIChannelMessagesBulkDeleteJSONBody,
 	RESTPostAPIInteractionCallbackJSONBody,
 	RESTPostAPIWebhookWithTokenJSONBody,
 } from "./discord/index";
@@ -41,6 +43,8 @@ export type {
 	LamarDialog,
 	LamarPhrases,
 	RESTPostAPIChannelMessageJSONBody,
+	RESTGetAPIChannelMessagesResult,
+	RESTPostAPIChannelMessagesBulkDeleteJSONBody,
 	RESTPostAPIInteractionCallbackJSONBody,
 	RESTPostAPIWebhookWithTokenJSONBody,
 	SteamUserInfo,
