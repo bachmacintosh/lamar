@@ -6,10 +6,12 @@ export default async function deletePreviousMessages(
 	env: Env,
 ): Promise<void> {
 	const emptyResponse = 204;
+	const auditLogReason = "Regular Channel Message Cleanup by Lamar (BOT)";
 
 	if (messages.length === 1) {
 		const headers = new Headers({
 			Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`,
+			"X-Audit-Log-Reason": auditLogReason,
 		});
 		const url = `https://discord.com/api/v${APIVersion}/channels/${env.DISCORD_CHANNEL_ID}/messages/${messages[0].id}`;
 		const init: RequestInit = {
@@ -24,6 +26,7 @@ export default async function deletePreviousMessages(
 		const headers = new Headers({
 			Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`,
 			"Content-Type": "application/json",
+			"X-Audit-Log-Reason": auditLogReason,
 		});
 
 		const messageIds: string[] = [];
