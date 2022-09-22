@@ -4,11 +4,13 @@
 	"timezone": "America/New_York",
 	"schedule": ["after 5am and before 11am"],
 	"labels": ["dependencies"],
-	"assignees": ["bachmacintosh"],
+	"rebaseWhen": "behind-base-branch",
+	"platformCommit": true,
 	"packageRules": [
 		{
 			"matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-			"automerge": true
+			"automerge": true,
+			"platformAutomerge": true
 		}
 	]
 }
