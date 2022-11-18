@@ -30,7 +30,7 @@ export default async function sendMessage(env: Env, title: string, description: 
 		"Content-Type": "application/json",
 	});
 
-	const init: RequestInit = {
+	const init: RequestInit<RequestInitCfProperties> = {
 		method: "POST",
 		headers,
 		body: JSON.stringify(payload),

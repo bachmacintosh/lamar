@@ -9,7 +9,7 @@ export default async function getPreviousMessages(env: Env): Promise<RESTGetAPIC
 	});
 
 	const url = `https://discord.com/api/v${APIVersion}/channels/${env.DISCORD_CHANNEL_ID}/messages?limit=100`;
-	const init: RequestInit = {
+	const init: RequestInit<RequestInitCfProperties> = {
 		method: "GET",
 		headers,
 	};
