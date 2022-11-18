@@ -14,7 +14,7 @@ export default async function deletePreviousMessages(
 			"X-Audit-Log-Reason": auditLogReason,
 		});
 		const url = `https://discord.com/api/v${APIVersion}/channels/${env.DISCORD_CHANNEL_ID}/messages/${messages[0].id}`;
-		const init: RequestInit = {
+		const init: RequestInit<RequestInitCfProperties> = {
 			method: "DELETE",
 			headers,
 		};
@@ -36,7 +36,7 @@ export default async function deletePreviousMessages(
 		const payload: RESTPostAPIChannelMessagesBulkDeleteJSONBody = { messages: messageIds };
 
 		const url = `https://discord.com/api/v${APIVersion}/channels/${env.DISCORD_CHANNEL_ID}/messages/bulk-delete`;
-		const init: RequestInit = {
+		const init: RequestInit<RequestInitCfProperties> = {
 			method: "POST",
 			headers,
 			body: JSON.stringify(payload),

@@ -12,7 +12,7 @@ export default async function respondToCommand(
 		Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`,
 		"Content-Type": "application/json",
 	});
-	const init: RequestInit = {
+	const init: RequestInit<RequestInitCfProperties> = {
 		method: "POST",
 		body: JSON.stringify(message),
 		headers,
