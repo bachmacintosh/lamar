@@ -17,7 +17,7 @@
 		"@cloudflare/workers-types": "4.20221111.1",
 		"@typescript-eslint/eslint-plugin": "5.44.0",
 		"@typescript-eslint/parser": "5.44.0",
-		"discord-api-types": "0.37.19",
+		"discord-api-types": "0.37.20",
 		"eslint": "8.28.0",
 		"eslint-config-prettier": "8.5.0",
 		"prettier": "2.8.0",
