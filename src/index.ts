@@ -1,6 +1,6 @@
 import type { Context } from "toucan-js/dist/types";
 import type { Env } from "./types";
-import Toucan from "toucan-js";
+import { Toucan } from "toucan-js";
 import handleInteraction from "./functions/discord/handleInteraction";
 import handleScheduled from "./functions/cloudflare/handleScheduled";
 
@@ -10,8 +10,10 @@ export default {
 			dsn: "https://25641ba90b33429baa4c313eaa8d57d5@o79685.ingest.sentry.io/6397906",
 			context,
 			request,
-			allowedHeaders: ["user-agent"],
-			allowedSearchParams: /(?<params>.*)/u,
+			requestDataOptions: {
+				allowedHeaders: ["user-agent"],
+				allowedSearchParams: /(?<params>.*)/u,
+			},
 		});
 		try {
 			const response = await handleInteraction(request, env);
